@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Old Castle Library Manager",
+  "version": "1.0",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["*://*.kobo.com/*", "*://*.readmoo.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
