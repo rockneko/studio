@@ -9,27 +9,26 @@ interface BookCoverProps {
 export function BookCover({ book, onSelect }: BookCoverProps) {
   return (
     <div
-      className="group relative cursor-pointer text-center transition-all duration-300 ease-in-out"
+      className="relative group cursor-pointer transition-transform hover:-translate-y-2"
       onClick={() => onSelect(book)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onSelect(book)}
       aria-label={`View details for ${book.title}`}
     >
-      <div className="transform transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-105">
-        <div className="relative w-full aspect-[2/3] overflow-hidden rounded-md shadow-lg group-hover:shadow-primary/30">
-          <Image
-            src={book.coverUrl}
-            alt={`Cover of ${book.title}`}
-            fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 15vw"
-            className="object-cover"
-            data-ai-hint="book cover"
-          />
-        </div>
+      <div className="w-24 h-36 bg-gray-200 shadow-[5px_5px_15px_rgba(0,0,0,0.4)] rounded-r-sm overflow-hidden border-l-4 border-black/20 relative">
+        <Image
+          src={book.coverUrl}
+          alt={`Cover of ${book.title}`}
+          fill
+          sizes="100px"
+          className="object-cover"
+          data-ai-hint="book cover"
+        />
       </div>
-      <h3 className="mt-4 text-sm font-semibold text-foreground truncate">{book.title}</h3>
-      <p className="text-xs text-muted-foreground truncate">{book.author}</p>
+      <div className="absolute bottom-full mb-2 w-max max-w-xs hidden group-hover:block bg-black/80 text-white text-[10px] p-1 rounded z-20">
+        {book.title}
+      </div>
     </div>
   );
 }

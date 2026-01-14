@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import type { Book, Category } from '@/lib/types';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Bookshelf } from './bookshelf';
 import { BookDetails } from './book-details';
 
@@ -25,23 +24,16 @@ export function Library({ initialBooks, categories }: LibraryProps) {
 
   return (
     <>
-      <Tabs defaultValue={categories[0]?.id || 'all'} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 md:w-auto md:grid-cols-none">
-          {categories.map((category) => (
-            <TabsTrigger key={category.id} value={category.id}>
-              {category.name}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+      <div className="w-full space-y-8">
         {categories.map((category) => (
-          <TabsContent key={category.id} value={category.id} className="mt-8">
-            <Bookshelf
-              books={books.filter((book) => book.category === category.id)}
-              onBookSelect={handleSelectBook}
-            />
-          </TabsContent>
+          <Bookshelf
+            key={category.id}
+            category={category}
+            books={books.filter((book) => book.category === category.id)}
+            onBookSelect={handleSelectBook}
+          />
         ))}
-      </Tabs>
+      </div>
       <BookDetails
         book={selectedBook}
         open={!!selectedBook}
